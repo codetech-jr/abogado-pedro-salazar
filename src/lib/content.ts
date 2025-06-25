@@ -144,6 +144,7 @@ export const siteContent: SiteContent = {
 
   clientBrands: {
     title: "Empresas que han confiado en mi asesoría",
+    substitle: "Una trayectoria de confianza y resultados comprobados.",
     logos: [
       { src: "/brands/alfonzo-rivas.png", alt: "Alfonzo Rivas" },
       { src: "/brands/caledonia.png", alt: "Galletas Caledonia" },

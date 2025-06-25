@@ -74,6 +74,7 @@ export type SiteContent = {
   };
   clientBrands: {
     title: string;
+    substitle: string;
     logos: {
       src: string;
       alt: string;
