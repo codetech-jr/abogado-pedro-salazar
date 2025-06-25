@@ -1,8 +1,8 @@
 // src/lib/content.ts
 
-import type { Service, Testimonial } from "./types"; // Importamos AMBOS tipos desde nuestro archivo central
+import type { SiteContent } from "./types"; // Importamos AMBOS tipos desde nuestro archivo central
 
-export const siteContent = {
+export const siteContent: SiteContent = {
   hero: {
     title: "Pedro Salazar",
     subtitle1: "Abogado Corporativo",
@@ -126,7 +126,7 @@ export const siteContent = {
         ],
         bannerImageSrc: "/services/derecho-internacional.jpg",
       },
-    ] as Service[],
+    ],
   },
 
   experience: {
@@ -186,7 +186,7 @@ export const siteContent = {
         title: "Fundador, Edificar Constructora",
         imageSrc: "/testimonials/quote-3.jpg",
       },
-    ] as Testimonial[],
+    ],
   },
 
   contact: {

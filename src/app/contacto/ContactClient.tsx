@@ -14,6 +14,10 @@ import {
   FaFacebook,
 } from "react-icons/fa";
 
+//  ▼▼▼ 1. IMPORTA EL TIPO CORRECTO ▼▼▼
+import type { ContactInfo } from "@/lib/types";
+
+// --- MAPA DE ICONOS (Esto está perfecto) ---
 const socialIconMap: { [key: string]: React.ReactNode } = {
   linkedin: <FaLinkedin />,
   twitter: <FaTwitter />,
@@ -23,7 +27,8 @@ const socialIconMap: { [key: string]: React.ReactNode } = {
 const googleMapsSrc =
   "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3926.677515355905!2d-66.87991582591971!3d10.206821969443679!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8c2aeec9821e52d9%3A0x8c0eb85d4cac8cd4!2sConjunto%20Residencias%20Las%20Trinitarias!5e0!3m2!1ses!2sve!4v1750881216017!5m2!1ses!2sve";
 
-const ContactClient = ({ contact }: { contact: unknown }) => {
+//  ▼▼▼ 2. REEMPLAZA '{ contact: unknown }' POR EL TIPO CORRECTO ▼▼▼
+const ContactClient = ({ contact }: { contact: ContactInfo }) => {
   // --- Hooks de Animación ---
   const contentRef = useRef(null);
   const isContentInView = useInView(contentRef, { once: true, amount: 0.1 });
@@ -41,7 +46,7 @@ const ContactClient = ({ contact }: { contact: unknown }) => {
     if (isMapInView) mapControls.start("visible");
   }, [isMapInView, mapControls]);
 
-  // --- Variantes de Animación ---
+  // --- Variantes de Animación (Todo esto está perfecto) ---
   const heroContainerVariants = {
     hidden: {},
     visible: { transition: { staggerChildren: 0.2 } },
@@ -115,6 +120,7 @@ const ContactClient = ({ contact }: { contact: unknown }) => {
             variants={heroItemVariants}
             className="text-lg text-gray-200 mt-4 max-w-3xl mx-auto"
           >
+            {/* Ahora esto es seguro y no dará error */}
             {contact.description}
           </motion.p>
         </motion.div>
@@ -223,7 +229,6 @@ const ContactClient = ({ contact }: { contact: unknown }) => {
                 variants={itemVariants}
                 className="space-y-6 text-text-dark"
               >
-                {/* ...Items de lista */}
                 <li className="flex items-start">
                   <FaMapMarkerAlt className="text-accent mr-4 mt-1 flex-shrink-0 text-xl" />
                   <span>{contact.info.address}</span>
@@ -249,7 +254,8 @@ const ContactClient = ({ contact }: { contact: unknown }) => {
                   {contact.social.title}
                 </h4>
                 <div className="flex space-x-4">
-                  {contact.social.links.map((link: unknown) => (
+                  {/* ▼▼▼ 3. QUITAMOS EL 'unknown' DEL MAPA ▼▼▼ */}
+                  {contact.social.links.map((link) => (
                     <a
                       key={link.name}
                       href={link.href}
