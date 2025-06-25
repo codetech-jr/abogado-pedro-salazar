@@ -7,11 +7,17 @@ import Link from "next/link";
 import { motion, useInView, useAnimation } from "framer-motion";
 import { FaCheckCircle } from "react-icons/fa";
 
-// 1. Importa el tipo que acabamos de crear
+// Importa el tipo 'Service' desde tu archivo de tipos centralizado
 import type { Service } from "@/lib/types";
 
-// 2. Usa el tipo 'Service' en lugar de 'unknown'
-const ServiceDetailClient = ({ service }: { service: Service }) => {
+// Define las props que este componente espera recibir
+type ServiceDetailClientProps = {
+  service: Service;
+};
+
+// --- Componente de Presentación (Client Component) ---
+const ServiceDetailClient = ({ service }: ServiceDetailClientProps) => {
+  // Hooks de Framer Motion para controlar animaciones al hacer scroll
   const contentRef = useRef(null);
   const isContentInView = useInView(contentRef, { once: true, amount: 0.1 });
   const contentControls = useAnimation();
@@ -20,6 +26,7 @@ const ServiceDetailClient = ({ service }: { service: Service }) => {
   const isCtaInView = useInView(ctaRef, { once: true, amount: 0.3 });
   const ctaControls = useAnimation();
 
+  // Dispara las animaciones cuando los elementos entran en la vista
   useEffect(() => {
     if (isContentInView) contentControls.start("visible");
   }, [isContentInView, contentControls]);
@@ -28,6 +35,7 @@ const ServiceDetailClient = ({ service }: { service: Service }) => {
     if (isCtaInView) ctaControls.start("visible");
   }, [isCtaInView, ctaControls]);
 
+  // --- Definiciones de Variantes de Animación ---
   const bannerContainerVariants = {
     hidden: {},
     visible: { transition: { staggerChildren: 0.2 } },
@@ -69,15 +77,17 @@ const ServiceDetailClient = ({ service }: { service: Service }) => {
       transition: { duration: 0.5, ease: "easeOut" },
     },
   };
-
+  
+  // --- Renderizado del Componente ---
   return (
-    <div className="overflow-x-hidden">
+    <div className="bg-white overflow-x-hidden"> {/* overflow-x-hidden evita barras de scroll horizontales por las animaciones */}
+      
+      {/* Sección del Banner Principal */}
       <section
         className="relative bg-cover bg-center text-white py-28 text-center"
-        // 3. ¡Esta línea ahora es 100% segura para TypeScript!
         style={{ backgroundImage: `url(${service.bannerImageSrc})` }}
       >
-        <div className="absolute inset-0 bg-primary opacity-75"></div>
+        <div className="absolute inset-0 bg-primary bg-opacity-75"></div>
         <motion.div
           className="container mx-auto px-6 relative z-10"
           variants={bannerContainerVariants}
@@ -86,7 +96,7 @@ const ServiceDetailClient = ({ service }: { service: Service }) => {
         >
           <motion.h1
             variants={bannerItemVariants}
-            className="text-5xl font-bold"
+            className="text-4xl md:text-5xl font-bold"
           >
             {service.title}
           </motion.h1>
@@ -99,16 +109,16 @@ const ServiceDetailClient = ({ service }: { service: Service }) => {
         </motion.div>
       </section>
 
+      {/* Sección de Contenido Detallado */}
       <motion.section
         ref={contentRef}
-        className="py-24 bg-white"
-        variants={listVariants}
+        className="py-20 md:py-24"
         initial="hidden"
         animate={contentControls}
       >
         <div className="container mx-auto px-6 max-w-4xl">
-          <div className="prose lg:prose-lg mx-auto text-lg">
-            <div className="space-y-6">
+          <div className="prose lg:prose-lg max-w-none text-gray-800 text-lg">
+            <motion.div variants={listVariants} className="space-y-6">
               {service.detailedDescription.map(
                 (paragraph: string, index: number) => (
                   <motion.p key={index} variants={contentItemVariants}>
@@ -116,9 +126,9 @@ const ServiceDetailClient = ({ service }: { service: Service }) => {
                   </motion.p>
                 )
               )}
-            </div>
+            </motion.div>
 
-            {service.keyPoints && (
+            {service.keyPoints && service.keyPoints.length > 0 && (
               <>
                 <motion.h2
                   variants={contentItemVariants}
@@ -126,14 +136,14 @@ const ServiceDetailClient = ({ service }: { service: Service }) => {
                 >
                   Puntos Clave del Servicio
                 </motion.h2>
-                <motion.ul variants={listVariants} className="space-y-3">
+                <motion.ul variants={listVariants} className="space-y-4 pl-0 list-none">
                   {service.keyPoints.map((point: string, index: number) => (
                     <motion.li
                       key={index}
                       variants={listItemVariants}
                       className="flex items-start"
                     >
-                      <FaCheckCircle className="text-accent mr-3 mt-1 flex-shrink-0" />
+                      <FaCheckCircle className="text-accent mr-3 mt-1 flex-shrink-0 h-5 w-5" />
                       <span>{point}</span>
                     </motion.li>
                   ))}
@@ -144,6 +154,7 @@ const ServiceDetailClient = ({ service }: { service: Service }) => {
         </div>
       </motion.section>
 
+      {/* Sección de Llamada a la Acción (CTA) */}
       <motion.section
         ref={ctaRef}
         className="bg-primary py-20"
@@ -156,12 +167,12 @@ const ServiceDetailClient = ({ service }: { service: Service }) => {
             ¿Listo para discutir su caso?
           </h2>
           <p className="text-lg text-white mb-8 max-w-2xl mx-auto">
-            Contácteme para una consulta confidencial sobre{" "}
-            {service.title.toLowerCase()}.
+            Contáctenos para una consulta confidencial sobre{" "}
+            <span className="font-semibold">{service.title}</span>.
           </p>
           <Link
             href="/contacto"
-            className="inline-block bg-accent text-white font-bold py-3 px-8 rounded-md hover:bg-[#D4AF37] transition-all duration-300 hover:scale-105 active:scale-95"
+            className="inline-block bg-accent text-white font-bold py-3 px-8 rounded-md hover:bg-[#D4AF37] transition-all duration-300 transform hover:scale-105 active:scale-95"
           >
             Contactar Ahora
           </Link>

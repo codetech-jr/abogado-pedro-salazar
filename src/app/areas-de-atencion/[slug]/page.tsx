@@ -1,16 +1,21 @@
 // src/app/areas-de-atencion/[slug]/page.tsx
 
-import { siteContent } from "@/lib/content";
-import { notFound } from "next/navigation";
-import ServiceDetailClient from "./ServiceDetailClient"; // Importamos el componente cliente que ya tienes
+import { notFound } from 'next/navigation';
+import ServiceDetailClient from './ServiceDetailClient'; // Componente que crearemos en el siguiente paso
 
-// --- Metadata Dinámica (Opcional pero MUY recomendado para SEO) ---
-// Esta función genera el título y la descripción para la pestaña del navegador.
-export async function generateMetadata({
-  params,
-}: {
-  params: { slug: string };
-}) {
+// Supongamos que tienes tus datos en un archivo centralizado como este
+// Ajusta la ruta si es diferente
+import { siteContent } from '@/lib/content'; 
+
+// Define el tipo para las props de la página
+type PageProps = {
+  params: {
+    slug: string;
+  };
+};
+
+// --- Generación de Metadata Dinámica (para SEO) ---
+export async function generateMetadata({ params }: PageProps) {
   const service = siteContent.services.items.find(
     (item) => item.slug === params.slug
   );
@@ -18,41 +23,37 @@ export async function generateMetadata({
   if (!service) {
     return {
       title: "Servicio no encontrado",
-      description: "La página que buscas no existe.",
+      description: "El área de atención que buscas no existe.",
     };
   }
 
   return {
     title: `${service.title} | Pedro Salazar Abogados`,
     description: service.description,
+    // Puedes agregar más metadata aquí, como openGraph, etc.
   };
 }
 
 // --- Componente de Página (Server Component) ---
-export default function ServiceDetailPage({
-  params,
-}: {
-  params: { slug: string };
-}) {
-  // 1. Extraemos el slug de la URL que nos pasa Next.js
+// Este componente se encarga de la lógica de datos y de pasar la información al cliente.
+export default function ServiceDetailPage({ params }: PageProps) {
   const { slug } = params;
 
-  // 2. Buscamos en nuestra lista de servicios el que tenga el mismo slug
+  // Busca el servicio correspondiente al slug
   const service = siteContent.services.items.find((item) => item.slug === slug);
 
-  // 3. Si no encontramos ningún servicio con ese slug, mostramos una página 404.
-  //    Esto es crucial para evitar el error "cannot read properties of undefined".
+  // Si no se encuentra el servicio, muestra la página 404 de Next.js
   if (!service) {
     notFound();
   }
 
-  // 4. Si encontramos el servicio, renderizamos el componente cliente
-  //    y le pasamos el objeto 'service' completo como una prop.
+  // Renderiza el componente cliente y le pasa los datos del servicio
   return <ServiceDetailClient service={service} />;
 }
 
-// --- Generación de Rutas Estáticas (Opcional pero recomendado para rendimiento) ---
-// Esta función le dice a Next.js qué páginas debe pre-construir.
+
+// --- Generación de Rutas Estáticas (para Vercel y rendimiento) ---
+// Le dice a Next.js qué páginas pre-construir durante el 'build'
 export async function generateStaticParams() {
   return siteContent.services.items.map((service) => ({
     slug: service.slug,
