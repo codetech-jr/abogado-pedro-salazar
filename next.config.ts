@@ -1,7 +1,9 @@
-import type { NextConfig } from "next";
+// NUEVO next.config.mjs
 
-const nextConfig: NextConfig = {
-  /* config options here */
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  reactStrictMode: true,
+  // ... otras opciones que tuvieras
 };
 
 export default nextConfig;
