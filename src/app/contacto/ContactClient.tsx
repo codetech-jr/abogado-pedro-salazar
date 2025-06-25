@@ -21,7 +21,7 @@ const socialIconMap: { [key: string]: React.ReactNode } = {
 };
 
 const googleMapsSrc =
-  "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3036.033789370001!2d-3.692099684592231!3d40.45233197936113!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd4228e2a5a7c299%3A0x6B35251E5B942D5A!2sP.º%20de%20la%20Castellana%2C%20123%2C%2028046%20Madrid%2C%20Spain!5e0!3m2!1sen!2sus!4v1624200000000!5m2!1sen!2sus";
+  "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3926.677515355905!2d-66.87991582591971!3d10.206821969443679!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8c2aeec9821e52d9%3A0x8c0eb85d4cac8cd4!2sConjunto%20Residencias%20Las%20Trinitarias!5e0!3m2!1ses!2sve!4v1750881216017!5m2!1ses!2sve";
 
 const ContactClient = ({ contact }: { contact: unknown }) => {
   // --- Hooks de Animación ---

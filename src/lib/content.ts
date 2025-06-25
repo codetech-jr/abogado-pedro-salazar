@@ -195,7 +195,7 @@ export const siteContent = {
       "Estoy a su disposición para resolver cualquier consulta legal que pueda tener. No dude en ponerse en contacto conmigo.",
     info: {
       title: "Información de Contacto",
-      address: "Paseo de la Castellana 123, Planta 2, Madrid",
+      address: "KM 3 Carretera Nacional Charallave, Cúa, Miranda",
       phone: "+34 91 123 45 67",
       email: "pedro.salazar@abogados.com",
     },

@@ -8,7 +8,7 @@ import UbicacionClient from "./UbicacionClient"; // <-- 1. Importa el componente
 export const metadata: Metadata = {
   title: "Ubicación | Pedro Salazar Abogado",
   description:
-    "Encuentre la oficina de Pedro Salazar en Madrid. Dirección, mapa interactivo y horario de atención.",
+    "Encuentre la oficina de Pedro Salazar en Las Trinitarias. Dirección, mapa interactivo y horario de atención.",
 };
 
 const UbicacionPage = () => {

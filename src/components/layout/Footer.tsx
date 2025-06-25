@@ -122,8 +122,8 @@ const Footer = () => {
               Contacto
             </h3>
             <ul className="space-y-2 text-sm">
-              <li>Paseo de la Castellana 123, Planta 2, Madrid</li>
-              <li>+34 91 123 45 67</li>
+              <li>KM 3 Carretera Nacional Charallave, Cúa, Miranda</li>
+              <li>+58 4123998217</li>
               <li>pedro.salazar@abogados.com</li>
             </ul>
           </motion.div>
