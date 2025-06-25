@@ -10,10 +10,9 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // Aquí puedes poner tus colores personalizados si los tenías
-        primary: '#333333', // Ejemplo
-        accent: '#c0a062', // Ejemplo
-        neutral: '#f5f5f5', // Ejemplo
+        primary: '#333333',
+        accent: '#c0a062',
+        neutral: '#f5f5f5',
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
