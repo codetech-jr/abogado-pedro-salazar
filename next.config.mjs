@@ -3,7 +3,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  // ... otras opciones que tuvieras
+  // ... cualquier otra opción que necesites
 };
 
 export default nextConfig;
