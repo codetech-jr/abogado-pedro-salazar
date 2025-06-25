@@ -1,31 +1,26 @@
-// tailwind.config.ts
+// tailwind.config.js
 
-import type { Config } from 'tailwindcss';
-
-const config: Config = {
+/** @type {import('tailwindcss').Config} */
+module.exports = {
   content: [
-    './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
+    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
     extend: {
-      // 1. Configura la familia de fuentes
-      fontFamily: {
-        // 'sans' será tu fuente por defecto (Lato)
-        sans: ['var(--font-lato)'],
-        // 'serif' será tu fuente para titulares (Playfair Display)
-        serif: ['var(--font-playfair-display)'],
-      },
-      // 2. No olvides tu paleta de colores aquí
       colors: {
-        'primary': '#1C1C1C',
-        'accent': '#C0A15E',
-        'neutral': '#F8F8F8',
-        'text-dark': '#333333',
+        // Aquí puedes poner tus colores personalizados si los tenías
+        primary: '#333333', // Ejemplo
+        accent: '#c0a062', // Ejemplo
+        neutral: '#f5f5f5', // Ejemplo
+      },
+      backgroundImage: {
+        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
+        "gradient-conic":
+          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
     },
   },
   plugins: [],
 };
-export default config;
