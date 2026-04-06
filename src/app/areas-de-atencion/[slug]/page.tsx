@@ -10,16 +10,17 @@ import type { Service } from '@/lib/types';
 // Define el tipo para las props que Next.js pasa a la página.
 // Este tipo se usará en múltiples lugares.
 type PageProps = {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 };
 
 // --- Generación de Metadata Dinámica (para SEO) ---
 // Esta función SÍ puede ser `async`.
 export async function generateMetadata({ params }: PageProps) {
+  const resolvedParams = await params;
   const service = siteContent.services.items.find(
-    (item: Service) => item.slug === params.slug
+    (item: Service) => item.slug === resolvedParams.slug
   );
 
   if (!service) {
@@ -43,8 +44,9 @@ export async function generateMetadata({ params }: PageProps) {
 // Function Component de React que recibe `PageProps`. Esto elimina el error
 // de tipo que Vercel está encontrando.
 //
-const ServiceDetailPage: React.FC<PageProps> = ({ params }) => {
-  const { slug } = params;
+const ServiceDetailPage = async ({ params }: PageProps) => {
+  const resolvedParams = await params;
+  const { slug } = resolvedParams;
 
   const service = siteContent.services.items.find(
     (item: Service) => item.slug === slug

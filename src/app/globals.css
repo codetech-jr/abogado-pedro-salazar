@@ -13,13 +13,12 @@
     --neutral: #F5F5F5;
     --textDark: #000000;
     --background: #ffffff; /* Añadimos el fondo por defecto para el modo claro */
-    --foreground: #000000; /* Añadimos el texto por defecto para el modo claro */
+   
   }
 
   @media (prefers-color-scheme: dark) {
     :root {
       --background: #0a0a0a;
-      --foreground: #ededed;
     }
   }
 
